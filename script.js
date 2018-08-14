@@ -3,7 +3,6 @@ var display = document.getElementById('display');
 
 calculator.addEventListener('click', function(event){
 
-	var target = event.target;
   var dataset = target.dataset;
   var value = dataset.value;
   var type = dataset.type;
@@ -121,7 +120,7 @@ class ResultOperandStrategy  extends BaseStrategy {
     let dg = this.delegate;
     dg.setRightOperand(dg.getAccumulator());
     dg.setAccumulator(dg.operation());
-		console.log(dg.getAccumulator);
+		
   }
 }
 
@@ -172,10 +171,12 @@ class Calculator {
           }
           if (value === ACTION_RESULT){
             this.strategy.onResult();
+			this.result();
           }
         break;
     }
     this.logger();
+	
   }
 
   operation () {
@@ -230,26 +231,6 @@ class Calculator {
     this.acc = [];
   }
 
-  reset() {
-    this.init();
-  }
-  logger() {
-    console.log({
-      acc: this.acc,
-      operator: this.operator,
-      leftOperand: this.leftOperand,
-      rightOperand: this.rightOperand,
-      state: this.state,
-			result: this.acc.
-    })
-  }
-
-  output() {
-    let result = 0;
-    if (this.acc.length > 0) {
-      result = this.acc.join('');
-    }
-    return result;
-  }
+ 
 }
 var calc = new Calculator();
